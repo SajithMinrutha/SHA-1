@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 public class SHA1
 
 {
@@ -7,16 +6,18 @@ public class SHA1
     public static void Main(string[] args)
     {
         string input = "Hello,World!";
-        byte[] bytedInput = ShaMath.ConvertToAsciiBytes(input);
-        byte[] paddedBytes = ShaMath.AddPaddingToBytes(bytedInput);
+        byte[] bytedInput = SHAMath.ConvertToAsciiBytes(input);
+        byte[] paddedBytes = SHAMath.AddPaddingToBytes(bytedInput);
+        string hashedOutput = SHAMath.ComputeHash(paddedBytes);
         Console.WriteLine(string.Join(",", bytedInput)); //testing
         Console.WriteLine(string.Join(",", paddedBytes)); //testing
-        string hashedOutput = ShaMath.ComputeHash(input);
+        Console.WriteLine(hashedOutput);
+        
     }
 
 
-
-public static class ShaMath
+}
+public static class SHAMath
 {
     public static byte[] ConvertToAsciiBytes(string input)
     {
@@ -41,32 +42,50 @@ public static class ShaMath
                 return bytedArray; //return the array of bytes
             }
         }
-        
+
         catch (Exception e)
         {
             Console.WriteLine($"Unexpected Error : {e}");
             throw;
         }
 
-        
-        
+
+
     }
     public static byte[] AddPaddingToBytes(byte[] input)
+    {
+        ulong bitlength = (ulong)input.Length * 8; //converts bytes into bits
+        List<byte> paddedList = new List<byte>(input); //create a new list to add paddings
+        paddedList.Add(0x80); // add 1 bit padding
+
+        while ((paddedList.Count % 64) != 56)
         {
-            ulong bitlength = (ulong)input.Length * 8;
+            paddedList.Add(0x00);
+        }
+        byte[] lengthBytes = ConvertUlongToBytes(bitlength);
+        paddedList.AddRange(lengthBytes);
 
-            return [65, 54];
+
+
+        return paddedList.ToArray();
     }
-    public static string[] ConvertToBytes(string input)
+    public static byte[] ConvertUlongToBytes(ulong input) //generates big endian bytes
     {
 
-        return ["", ""];
-    }
-    public static string ComputeHash(string input)
-    {
-        return "hello";
-    }
+        byte[] bigEndianBytes = new byte[8];
+        for (int i = 7; i >= 0; i--)
+        {
+            bigEndianBytes[i] = (byte)(input & 0xFF);
+            input >>= 8;
+        }
 
+
+        return bigEndianBytes;
+    }
+    public static string ComputeHash(byte[] paddedBytes)
+    {
+        return "";
 }
 
 }
+
