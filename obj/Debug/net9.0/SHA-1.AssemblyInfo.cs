@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SHA-1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6f57c2ad4940c76539805e75091f894cc5d2c5b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d01e538bc5a759a1a0e447e40005fd489a1d3686")]
 [assembly: System.Reflection.AssemblyProductAttribute("SHA-1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SHA-1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

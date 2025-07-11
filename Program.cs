@@ -8,10 +8,10 @@ public class SHA1
         string input = "Hello,World!";
         byte[] bytedInput = SHAMath.ConvertToAsciiBytes(input);
         byte[] paddedBytes = SHAMath.AddPaddingToBytes(bytedInput);
-        string hashedOutput = SHAMath.ComputeHash(paddedBytes);
+        string hash = SHAMath.ComputeHash(paddedBytes);
         Console.WriteLine(string.Join(",", bytedInput)); //testing
         Console.WriteLine(string.Join(",", paddedBytes)); //testing
-        Console.WriteLine(hashedOutput);
+        Console.WriteLine(hash);
         
     }
 
@@ -70,22 +70,35 @@ public static class SHAMath
         return paddedList.ToArray();
     }
     public static byte[] ConvertUlongToBytes(ulong input) //generates big endian bytes
-    {
-
-        byte[] bigEndianBytes = new byte[8];
-        for (int i = 7; i >= 0; i--)
         {
-            bigEndianBytes[i] = (byte)(input & 0xFF);
-            input >>= 8;
+
+            byte[] bigEndianBytes = new byte[8];
+            for (int i = 7; i >= 0; i--)
+            {
+                bigEndianBytes[i] = (byte)(input & 0xFF);
+                input >>= 8;
+            }
+
+
+            return bigEndianBytes;
         }
-
-
-        return bigEndianBytes;
-    }
     public static string ComputeHash(byte[] paddedBytes)
     {
-        return "";
-}
+        // Initial hash values
+        uint h0 = 0x67452301;
+        uint h1 = 0xEFCDAB89;
+        uint h2 = 0x98BADCFE;
+        uint h3 = 0x10325476;
+        uint h4 = 0xC3D2E1F0;
 
-}
+        // Process each 512-bit chunk
+        for (int chunkStart = 0; chunkStart < paddedBytes.Length; chunkStart += 64)
+        {
+        }
+        return "";
+    }
+
+    }
+
+
 
