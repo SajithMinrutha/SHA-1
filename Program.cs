@@ -102,20 +102,20 @@ public static class SHAMath
                         ((uint)paddedBytes[chunkStart + (i * 4) + 3]);
             }
 
-            // 2. Extend the 16 words to 80 words
+            // Extend the 16 words to 80 words
             for (int i = 16; i < 80; i++)
             {
                 words[i] = LeftRotate(words[i - 3] ^ words[i - 8] ^ words[i - 14] ^ words[i - 16], 1);
             }
 
-            // 3. Initialize working variables
+            // Initialize working variables
             uint a = h0;
             uint b = h1;
             uint c = h2;
             uint d = h3;
             uint e = h4;
 
-            // 4. Main loop 80 rounds
+            // Main loop 80 rounds
             for (int i = 0; i < 80; i++)
             {
                 uint f, k;
